@@ -7,7 +7,7 @@ exports.createProduct = (req, res, next) => {
         category: body.category,
         price: body.price,
         description: body.description,
-        user: req.userID
+        productCreatorID: req.userID
     })
     createProduct.save()
     .then(result=>{

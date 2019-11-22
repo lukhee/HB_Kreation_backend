@@ -20,9 +20,9 @@ let ProductSchema = new Schema({
         type: String,
         required: false
     }, 
-    productCreator: {
+    productCreatorID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     }
 }, {
     timestamps: true
