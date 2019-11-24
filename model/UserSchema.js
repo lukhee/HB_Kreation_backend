@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")//Require Mongoose
+const Order = require('./OrderSchema')
 const bcypt = require('bcrypt');
 const saltRound = 12;
 
@@ -22,9 +23,12 @@ let UserSchema = new Schema({
     },
     isAdmin: {
         type: Boolean,
-        required: false,
         default: false
-    }
+    }, 
+    orderID: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "order"
+    }]
 }, {
     timestamps: true
 })

@@ -17,7 +17,8 @@ exports.signUp = (req, res, next)=>{
         const newUser = new User({
             name: req.body.name,
             password: hashPassword,
-            email: req.body.email
+            email: req.body.email,
+            isAdmin: req.body.isAdmin
         })
         return newUser.save()
     })
@@ -49,6 +50,7 @@ exports.signIn = (req, res, next)=>{
         }
         validUser = user
         userId = validUser._id.toString()
+        isAdmin = validUser.isAdmin
         return bcrypt.compare(password, user.password)
     })
     .then(isEqual=>{
@@ -59,7 +61,8 @@ exports.signIn = (req, res, next)=>{
         }
         let token = jwtoken.sign({
             userId: userId,
-            email: validUser.email
+            email: validUser.email,
+            isAdmin: validUser.isAdmin
         },
         'supersupersecrete', 
         { expiresIn: '1h' });

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const productRoute = require("./routes/poducts")
 const authRoute = require("./routes/auth")
 const orderRoute = require("./routes/order")
+const commentRoute = require("./routes/comment")
 const mongooseConnection = require('./uti/db')
 
 const app = express()
@@ -17,9 +18,11 @@ app.use((req, res, next)=>{
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json()) // parse application/json
 
-app.use(productRoute)
+
 app.use('/auth', authRoute)
+app.use(productRoute)
 app.use(orderRoute)
+app.use('/comment', commentRoute)
 
 app.use((req, res, next)=>{
     let err = new Error("page not found")

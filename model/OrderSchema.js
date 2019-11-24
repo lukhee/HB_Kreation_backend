@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")//Require Mongoose
+const User = require('../model/UserSchema')
 
 //Define a schema
 var Schema = mongoose.Schema;
@@ -11,7 +12,7 @@ let OrderSchema = new Schema({
     }],
     userID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'user'
     } 
 }, {
     timestamps: true

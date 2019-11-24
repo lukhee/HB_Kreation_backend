@@ -13,6 +13,7 @@ exports.authMiddleware = (req, res, next)=>{
     try{
         const decoded = jwtoken.verify(token, "supersupersecrete");
         req.userID = decoded.userId;
+        req.isAdmin = decoded.isAdmin
         next();
     } catch(error){
         error.message = "user timeout or incorrect token"

@@ -20,8 +20,8 @@ exports.createProduct = (req, res, next) => {
 
 exports.getProductById = (req, res, next) => {
     let id = req.params.productID
-    // Product.findById(id).populate("user")
-    Product.findById(id)
+    Product.findById(id).populate("productCreatorID")
+    // Product.findById(id)
         .then(product => {
             if(!product){
                 let error = new Error("no product found")
@@ -31,6 +31,7 @@ exports.getProductById = (req, res, next) => {
             res.send(product)
         })
         .catch(err => {
+            console.log(err)
             next(err)
         })
 }
@@ -47,7 +48,6 @@ exports.allProducts = (req, res, next)=>{
 
 exports.updateProduct = (req, res, next) => {
     const { body } = req
-    console.log (body)
     let id = req.params.productID
     Product.findById(id)
         .then(product => {
